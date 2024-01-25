@@ -1,0 +1,32 @@
+For Password Validation (if there is \ (slash) you need to put \\ (double slash), because \ (single slash) acts as a escape charector
+
+@Patter can be used on charector sequence, not on int,long, double....
+
+Minimum eight characters, at least one letter and one number
+
+"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+
+Minimum eight characters, at least one letter, one number and one special character
+
+"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+
+Minimum eight characters, at least one uppercase letter, one lowercase letter and one number
+
+"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+
+Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character
+
+"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+
+----------------------------------------------------------------------------------------------------------------
+
+For Phone number
+@Patter can be used on charector sequence, not on int,long, double....
+
+Starts with 7 or 8 or 9 and have 10 digits
+"^[7-9][0-9]{9}"                         
+
+----------------------------------------------------------------------------------------------------------------
+For Email ID
+                         
+ ^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$                        
