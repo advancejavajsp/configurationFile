@@ -1,9 +1,5 @@
 
-        File Handling
-        Performing operation on a file such as reading and writing the data to a file is 
-known as file handling
-2. File handling is an integral part of programming language which is enable to store 
-the output of any particular program in a file and allow to performing on it 
+        
 
 ResultSet
  -> ResultSet is a inteface present in java.sql package
