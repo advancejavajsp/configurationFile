@@ -20,11 +20,11 @@
 <!--  Show SQL in console  -->
 <property name="hibernate.format_sql" value="true"/>
 <!--  Show SQL formatted  -->
-</properties>
+
 <!--  for caching  -->
   <property name="hibernate.cache.use_second_level_cache" value="true"></property> 
 			 <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory"></property>  
-
+</properties>
 </persistence-unit>
 
 </persistence>
