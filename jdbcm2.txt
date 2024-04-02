@@ -1,0 +1,230 @@
+
+        
+
+ResultSet
+ -> ResultSet is a inteface present in java.sql package
+ -> to create or get the ResultSet object we need to call getResultSet() 
+     present in statement interface
+  -> ResultSet have a cursor which pointing above the first record
+  ->ResultSet is used to store the when select query is executed
+
+     methods present in ResultSet
+    1. next() ==> it is used to move the cursor to next row 
+              ->if record is present it will return true 
+               -> if record is not present it will retun false
+    2.getX() ==> it used to fetch data 
+    
+         getX(int)
+         getX(String)
+
+
+    DriverManager
+    
+    -->DriverManager is a class present in java.sql package
+    -->DriverManager is a helper class
+
+     methods
+     1.getConnection();
+     2registerDriver();
+     3.deRegisterDriver();
+
+     JDBc Five Step
+      
+      1.load/register Driver
+          it is used load the Driver in JVM memory
+
+    2.create Connection
+        Connection is established between the java APPLICATION and database
+        we need url,username,password of database
+
+    3.create statement
+       statement is object which is used to store sql queries
+   
+    4.execute statement
+       
+    5.close the Connection
+
+
+    jdbc Step1
+    Load /register Driver
+       it can be done ways
+
+       Load the Driver
+        syntax Class.forName(String FQCN)
+
+         Class is class present java.lang
+
+         Exception -->ClassNotFoundException
+         FQCN 
+
+         register Driver
+           import org.postgresql.Driver
+
+
+           Create Connection
+          
+          Connection 
+           ->it is interface present in java.sql package
+           ->methods present int Connection interface
+            1.createStatement()
+            2.prepareStatement()
+            3.prepareCall()
+            4.close()
+            5.commit()
+            
+
+           Connection can be established in 3 ways
+            1.getConnection(String url ,String user,Sring password)
+            2.getConnection(String url)
+            3.getConnection(String url ,Properties properties)
+
+            getConnection()=> It is a static method present in  DriverManager class
+                            * it's return type is Connection 
+
+                     public Connection getConnection(String url){
+
+                     }        
+
+              1.getConnection(String url ,String user,Sring password)   
+                 url:
+                 user:
+                 password:    
+              2.getConnection(String url)
+              3.getConnection(String url,Properties properties)
+                String url = "jdbc:postgresql://localhost:5432/student";
+			        Properties p = new Properties();
+			        File f = new File("a.properties");-->file absolute path
+			        FileInputStream fi = new FileInputStream(f);
+			        p.load(fi);
+			        Connection connection = DriverManager.getConnection(url, p);
+
+         Properties File
+            it stores the data in key and value particular
+            it is used to store the configuration information in java
+
+          Properties -->class
+               present in java.util package 
+               extends hashtable 
+               it have inbuilt method which load the data from FileInputStream
+                   
+                   ->load()
+                   ->getProperty(String key)  
+
+
+    Step 3
+       createStatement = Statement Object is used to store the query for database  
+                          to execute task
+
+      Statement 
+         it is  a interface present in java.sql 
+
+         Methods present in Statement interface
+          execute()
+          executeUpdate()
+          executeQuery()
+          addBatch()
+          executeBatch()
+          getResultSet()  
+       
+       Syntax
+        Statement statement= connection.createStatement(); 
+
+    PreparedStatement 
+        it is interface present in java.sql
+        It is a child of Statement interface
+        It is used to execute dynamic queries
+        it is used for DML or DQL queries   
+
+    Syntax
+     PreparedStatement prepareStatement=connection.prepareStatement(String query);
+
+     Methods                                       
+       setX(int indexparameter ,value)
+          preparedStatement.setInt(int indexparameter, int value);
+			 preparedStatement.setString(int indexparameter,String value);
+			 preparedStatement.setDouble(int indexparameter, double value);
+			 preparedStatement.setLong(int indexparameter, long value);    
+
+     Callable Statement
+       it is present in java.sql
+       it is child of preparedStatement
+       it is used to call the stored procedure
+
+       Syntax 
+        CallableStatement sallableStatement  =connection.prepareCall(String query);
+
+       Query= call storedprocedureName(formal arguments)   
+
+       stored procedure
+         It is precompiled query stored in sql  
+
+Step 4
+   
+   Execute statement
+          it is used execute the queries in database
+          In execute statement we have 3 methods to execute queries
+    a)execute()
+      -->It is used for generic queries
+      -->return type is boolean
+           true--> for select queries
+            false--> non select queries
+      ** it is present in statement interface
+      boolean result=statement.execute();
+      -->it will throw sql exception
+
+     b)executeUpdate()
+     -->it is used for DML queries
+     -->return type is int
+         it will return  number of rows affected in database
+     ** It is present is Statement interface
+       int update=statement.executeUpdate();
+     -->it will throw sql exception
+
+     c)executeQuery()
+     -->it is used for select queries
+     -->return type is ResultSet object
+     ** It is present is Statement interface  
+     -->it will throw sql exception
+      ResultSet resultSet=statement.executeQuery();
+
+      step -5
+     close connection
+      5.CLOSE CONNECTION
+      Connection is a costly resources so we need to close the connection
+      close() of connection interface;
+      always close the connection in finally block
+      finally{
+        //statement
+      }
+      Each machine has a limited number of connections .
+      If connections are not closed the system will run out of resources and freeze
+
+       Transaction managment
+       it is used to control the transaction in database
+       jdbc by default do auto-commit
+
+       to turn off auto commit 
+        connection.setAutoCommit(false);
+
+        to control the transaction we have 3 methos present in connection interface
+        connection.commit();
+	
+	    connection.setSavepoint();
+		 connection.rollback();
+
+          BATCH EXECUTION
+          the process of executing the similar type of queries in a shot is called as 
+           batch EXECUTION 
+
+           advantages
+            -it improves the performance of application 
+
+          methods
+           addBatch() - it used to queries to batch 
+
+           executeBatch()  - it used to execute the batch 
+                           return int[] each index represent the number of rows got
+                           affected
+
+
+
