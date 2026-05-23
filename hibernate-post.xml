@@ -10,7 +10,7 @@ version="3.2">
 
 <persistence-unit name="java">
 
-<class>com.jsp.Student</class>
+
 
 <provider>
 org.hibernate.jpa.HibernatePersistenceProvider
